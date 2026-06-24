@@ -174,6 +174,49 @@ const Footer = ({ setPage }) => (
 );
 
 // ─────────────────────────────────────────────
+// TESTIMONIALS
+// ─────────────────────────────────────────────
+const TESTIMONIALS = [
+  { quote: "Having worked with several coaches, Shira stands miles above the rest. From our first conversation, she clearly saw me, understood my complex circumstances, and had the empathy, experience, and actionable advice to help me navigate high-stakes uncertainty. Her coaching is empowering, validating, and transformative.", name: "Charla", role: "UX Research Leader, Google" },
+  { quote: "She's direct in exactly the way I needed. She doesn't let you hide behind being agreeable, and she pushes on the things you're avoiding without ever making it feel unsafe. I left every session with a clearer head and something concrete to act on.", name: "Kroft", role: "CEO, Seattle" },
+  { quote: "She listens beneath the surface and helps you find the real root of what you're grappling with. I could talk through something messy and unfinished, and she would hear the thread in it before I could. Her guidance has stayed with me well beyond our sessions.", name: "Diana", role: "Senior Business Analyst, Los Angeles" },
+  { quote: "Shira helped me break down my challenges, map out clear options, and shift from a reactive mindset into a proactive energy that became the foundation for my next major initiative. The experience was incredibly grounding and empowering.", name: "Design Leader", role: "Enterprise Technology" },
+  { quote: "Shira didn't hand me answers. She helped me feel my way to them, which made the clarity feel earned and lasting. I'd recommend her warmly to anyone looking for a coach with real depth and insight.", name: "Nicole", role: "Director of Partnerships & Attorney, San Diego" },
+  { quote: "You were a big part of pointing me toward HR and enterprise as an area of focus, and I'm excited to have found a company and mission I can get behind. Thank you again.", name: "Elise", role: "Senior Designer, San Francisco" },
+];
+
+const Testimonials = ({ heading = true }) => (
+  <section style={{ borderTop:`1px solid ${t.borderDark}`, padding:"88px 0", position:"relative", overflow:"hidden" }}>
+    <div className="glow-violet" style={{ width:480, height:480, right:-150, top:"24%", opacity:0.16 }} />
+    <div className="wrap" style={{ position:"relative", zIndex:1 }}>
+      {heading && (
+        <>
+          <Eyebrow>What clients say</Eyebrow>
+          <h2 className="disp-md" style={{ color:t.textOnDark, marginBottom:38, maxWidth:560 }}>
+            The work speaks <span className="lilac-italic">for itself.</span>
+          </h2>
+        </>
+      )}
+      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:20, alignItems:"start" }} className="stack">
+        {TESTIMONIALS.map((tm,i) => (
+          <div key={i} className="card-mid" style={{ display:"flex", flexDirection:"column", gap:14 }}>
+            <div style={{ fontFamily:fonts.display, fontSize:46, color:t.lemon, lineHeight:1, marginBottom:-18 }}>&ldquo;</div>
+            <p style={{ fontFamily:fonts.body, fontSize:15, lineHeight:1.72, color:t.textOnDark }}>{tm.quote}</p>
+            <div style={{ marginTop:8, display:"flex", alignItems:"center", gap:10 }}>
+              <div style={{ width:22, height:2, background:t.lemon, borderRadius:2, flexShrink:0 }} />
+              <div>
+                <div style={{ fontFamily:fonts.body, fontSize:13.5, fontWeight:700, color:t.lilac }}>{tm.name}</div>
+                <div style={{ fontFamily:fonts.body, fontSize:12, color:t.textOnDarkMute }}>{tm.role}</div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+// ─────────────────────────────────────────────
 // HOME
 // ─────────────────────────────────────────────
 const Home = ({ setPage }) => (
@@ -274,6 +317,8 @@ const Home = ({ setPage }) => (
         </div>
       </div>
     </section>
+
+    <Testimonials />
 
     <section style={{ padding:"88px 0", position:"relative", overflow:"hidden" }}>
       <div className="glow-sea" style={{ width:400, height:400, left:-100, top:"50%", transform:"translateY(-50%)", opacity:0.08 }} />
@@ -398,22 +443,21 @@ const About = ({ setPage }) => (
 // ─────────────────────────────────────────────
 const Work = ({ setPage }) => {
   const offers = [
-    { name:"Clarity Session", tag:"Start here", duration:"Single session · 60 min", regular:"$425", sale:"$335", per:"one-time",
+    { name:"Clarity Session", tag:"Start here", duration:"Single session · 60 min",
       desc:"One focused hour to clarify what's actually in the way in your career, your life, or both. You'll leave with a clearer frame on the challenge, a perspective shift, and your next steps. No prep required.",
       includes:["60-minute video session","Named challenge and reframed perspective","Concrete next step, tailored to you","No ongoing commitment"],
       cta:"Book a Clarity Session", primary:true },
-    { name:"Sprint", tag:"Most focused", duration:"3 months · 6 sessions", regular:"$3,000", sale:"$2,400", per:"full engagement",
+    { name:"Sprint", tag:"Most focused", duration:"3 months · 6 sessions",
       desc:"Three months of concentrated coaching for a defined challenge or transition. You've named what you're working on and you're ready to move. We build momentum and go deep. Make meaningful progress.",
       includes:["6 bi-weekly sessions (60 min each)","Defined focus area and success markers","Between-session reflection prompts","Chat support between sessions"],
       cta:"Apply for a Sprint", primary:false },
-    { name:"Partnership", tag:"Deepest work", duration:"6 months · 12 sessions", regular:"$5,100", sale:"$4,100", per:"full engagement",
+    { name:"Partnership", tag:"Deepest work", duration:"6 months · 12 sessions",
       desc:"Six months of sustained whole-life coaching. We go end-to-end: diagnosis, exploration, challenge, integration. This is for leaders and humans navigating complex challenges, and committed to shedding what holds you back. Warning: Your life may become unrecognizable. In the best way.",
       includes:["12 bi-weekly sessions (60 min each)","Full arc from vision to integration","On-demand chat support between sessions","End-of-engagement review and forward plan"],
       cta:"Apply for a Partnership", primary:true },
   ];
   return (
     <main>
-      <SaleBanner />
       <section style={{ padding:"96px 0 72px", position:"relative", overflow:"hidden" }}>
         <div className="glow-violet" style={{ width:500, height:400, right:-120, top:-80, opacity:0.22 }} />
         <div className="wrap-narrow" style={{ position:"relative", zIndex:1 }}>
@@ -440,32 +484,27 @@ const Work = ({ setPage }) => {
                 padding:"44px 40px", position:"relative", overflow:"hidden",
               }}>
                 {i===2 && <div className="glow-violet" style={{ width:300, height:300, right:-60, top:-60, opacity:0.2 }} />}
-                <div style={{ display:"grid", gridTemplateColumns:"1fr 190px", gap:48 }} className="stack">
-                  <div style={{ position:"relative", zIndex:1 }}>
-                    <div style={{ display:"flex", gap:12, alignItems:"center", marginBottom:16, flexWrap:"wrap" }}>
-                      <span style={{ display:"inline-block", padding:"3px 12px", background:`${t.lemon}18`, border:`1px solid ${t.lemon}44`, borderRadius:100, fontFamily:fonts.body, fontSize:11, fontWeight:700, color:t.lemon, letterSpacing:"0.07em", textTransform:"uppercase" }}>{offer.tag}</span>
-                      <span className="body-sm" style={{ fontSize:13 }}>{offer.duration}</span>
-                    </div>
-                    <h2 className="disp-sm" style={{ color:t.textOnDark }}>{offer.name}</h2>
-                    <p className="body-md" style={{ marginTop:14, maxWidth:480 }}>{offer.desc}</p>
-                    <div className="dot-list" style={{ marginTop:22 }}>
-                      {offer.includes.map((inc,j) => (
-                        <div key={j} className="dot-item"><div className="dot" /><span style={{ fontFamily:fonts.body, fontSize:14.5, color:t.textOnDarkMid, lineHeight:1.6 }}>{inc}</span></div>
-                      ))}
-                    </div>
-                    <button className={offer.primary ? "btn-spark" : "btn-outline"} style={{ marginTop:28 }} onClick={() => setPage("Contact")}>{offer.cta}</button>
+                <div style={{ position:"relative", zIndex:1, maxWidth:660 }}>
+                  <div style={{ display:"flex", gap:12, alignItems:"center", marginBottom:16, flexWrap:"wrap" }}>
+                    <span style={{ display:"inline-block", padding:"3px 12px", background:`${t.lemon}18`, border:`1px solid ${t.lemon}44`, borderRadius:100, fontFamily:fonts.body, fontSize:11, fontWeight:700, color:t.lemon, letterSpacing:"0.07em", textTransform:"uppercase" }}>{offer.tag}</span>
+                    <span className="body-sm" style={{ fontSize:13 }}>{offer.duration}</span>
                   </div>
-                  <div style={{ position:"relative", zIndex:1 }}>
-                    <div style={{ background:`${t.lemon}0F`, border:`1px solid ${t.lemon}2A`, borderRadius:10, padding:"20px 22px", textAlign:"right" }}>
-                      <div style={{ fontFamily:fonts.body, fontSize:10, fontWeight:700, letterSpacing:"0.12em", textTransform:"uppercase", color:t.lemon, marginBottom:10 }}>Summer Sale</div>
-                      <div className="price-strike">{offer.regular}</div>
-                      <div style={{ fontFamily:fonts.display, fontSize:46, color:t.textOnDark, lineHeight:1, marginTop:4 }}>{offer.sale}</div>
-                      <div className="body-sm" style={{ marginTop:6 }}>{offer.per}</div>
-                    </div>
+                  <h2 className="disp-sm" style={{ color:t.textOnDark }}>{offer.name}</h2>
+                  <p className="body-md" style={{ marginTop:14, maxWidth:580 }}>{offer.desc}</p>
+                  <div className="dot-list" style={{ marginTop:22 }}>
+                    {offer.includes.map((inc,j) => (
+                      <div key={j} className="dot-item"><div className="dot" /><span style={{ fontFamily:fonts.body, fontSize:14.5, color:t.textOnDarkMid, lineHeight:1.6 }}>{inc}</span></div>
+                    ))}
                   </div>
+                  <button className={offer.primary ? "btn-spark" : "btn-outline"} style={{ marginTop:28 }} onClick={() => setPage("Contact")}>{offer.cta}</button>
                 </div>
               </div>
             ))}
+          </div>
+          <div style={{ marginTop:32, textAlign:"center" }}>
+            <p className="body-md" style={{ fontSize:15.5, color:t.textOnDarkMid, maxWidth:600, margin:"0 auto" }}>
+              Investment is shared on your Exploration Call, once we know the fit is right. <span style={{ color:t.lilac }}>No pressure, no hard sell.</span>
+            </p>
           </div>
           <div style={{ marginTop:20, padding:"18px 24px", background:t.duskMid, borderRadius:10, border:`1px solid ${t.borderDark}`, display:"flex", gap:12, alignItems:"flex-start" }}>
             <div className="dot-lemon" style={{ marginTop:8 }} />
@@ -475,6 +514,8 @@ const Work = ({ setPage }) => {
           </div>
         </div>
       </section>
+
+      <Testimonials heading={true} />
 
       <section style={{ borderTop:`1px solid ${t.borderDark}`, padding:"88px 0" }}>
         <div className="wrap-narrow">
@@ -625,9 +666,9 @@ const Contact = () => {
                   <label>I'm interested in…</label>
                   <select value={form.interest} onChange={e => setForm({...form,interest:e.target.value})}>
                     <option value="">Select one</option>
-                    <option value="clarity">Clarity Session ($335)</option>
-                    <option value="sprint">Sprint · 3 months ($2,400)</option>
-                    <option value="partnership">Partnership · 6 months ($4,100)</option>
+                    <option value="clarity">Clarity Session</option>
+                    <option value="sprint">Sprint (3 months)</option>
+                    <option value="partnership">Partnership (6 months)</option>
                     <option value="unsure">I'm not sure yet</option>
                   </select>
                 </div>
@@ -665,11 +706,6 @@ const Contact = () => {
                   <p className="body-sm" style={{ fontSize:14, color:t.textOnDarkMid, lineHeight:1.7 }}>
                     Many employers cover professional coaching through L&D budgets. I provide full documentation and invoicing. Just flag it in your note or on the call and I'll handle the details.
                   </p>
-                </div>
-                <div className="card-dark" style={{ position:"relative", overflow:"hidden" }}>
-                  <div className="glow-lemon" style={{ width:160, height:160, right:-40, bottom:-40, opacity:0.08 }} />
-                  <p style={{ fontFamily:fonts.display, fontSize:19, color:t.textOnDark, marginBottom:8, position:"relative", zIndex:1 }}>Summer pricing ends<br />September 1.</p>
-                  <p className="body-sm" style={{ fontSize:13, lineHeight:1.65, position:"relative", zIndex:1 }}>All current prices are summer rates. Regular pricing resumes after Labor Day.</p>
                 </div>
               </div>
             </div>
